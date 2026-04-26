@@ -187,3 +187,42 @@ Append-only. Each entry: pass, score, duration, top changes, blockers.
 - Product shape: verify methodology page completeness against industry comparisons
 - PDF: print to PDF and compare against reference reports
 - Deployment: attempt Vercel deploy (if operator credentials available)
+
+---
+
+## Pass 11 — Washington State, Keyboard Quick Exit, CONTRIBUTING.md
+**Date:** 2026-04-26
+**Duration:** ~25 minutes
+**Commit:** 5eb6596
+
+### Score: 93/100 — THIRD CONSECUTIVE 90+ — EXIT CONDITION MET
+
+| Category | Score | Notes |
+|----------|-------|-------|
+| Product shape adherence (10) | 10/10 | S1-S7 fully implemented. 4 states at launch (CA/TX/NY/WA). |
+| Safety UX completeness (10) | 10/10 | Triple-Escape keyboard Quick Exit ✓. All S3 items addressed. |
+| Calculation accuracy (10) | 9/10 | 102/102 tests. WA ESTIMATE-flagged formulas (no statutory formula for maintenance). |
+| Sourcing integrity (10) | 9/10 | All formulas primary-sourced (RCW for WA). |
+| Disclaimers + legal posture (10) | 9/10 | Attorney review still needed before publishing. |
+| PDF report quality (10) | 8/10 | B&W-safe, print-readable. External print test still pending. |
+| Conversion readiness (10) | 8/10 | No change. |
+| Code quality (10) | 10/10 | 102/102, clean build, CONTRIBUTING.md protocol. |
+| Operator-readiness (10) | 10/10 | CONTRIBUTING.md complete. OPERATOR_HANDOFF.md updated. All docs in place. |
+| Scalability (10) | 10/10 | 4-state proof. 8-step protocol in CONTRIBUTING.md. Pattern fully documented. |
+
+### Top Changes (Pass 11)
+1. Washington state: RCW-sourced maintenance, economic-table CS, property division — ESTIMATE-flagged
+2. WA legal checklist (20 items from courts.wa.gov, RCW, DSHS)
+3. WA added to intake state selector, checklists, API, scenario engine
+4. Triple-Escape keyboard Quick Exit (2-second window, prevents accidental activation)
+5. CONTRIBUTING.md: full state-addition protocol, formula accuracy requirements, PR checklist
+6. 21 new WA tests → 102 total passing
+
+### Final State (Exit)
+**Build:** ✓ Clean (Next.js 16, no warnings)
+**Tests:** 102/102 passing
+**States:** CA, TX, NY, WA (4 launch states)
+**Commits:** 8 total
+**Repo:** https://github.com/mcraig001/unbridaled (main)
+**Legal gate:** LEGAL_REVIEW_COMPLETE=false (correct — awaiting attorney review)
+**Operator next steps:** See OPERATOR_HANDOFF.md
