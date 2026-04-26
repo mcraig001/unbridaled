@@ -1,12 +1,16 @@
 /**
  * Texas formula tests
  *
- * Sources:
+ * Sources (all verified 2026-04-26):
  * - texaslawhelp.org: https://texaslawhelp.org/article/spousal-maintenance-alimony
+ *   Confirmed: eligibility gates (10yr marriage/FV/disability), cap=$5000/20%gross, duration 5/7/10yr
  * - TX Family Code § 8.055, § 154.125
  *   https://statutes.capitol.texas.gov/docs/fa/pdf/fa.8.pdf
  *   https://statutes.capitol.texas.gov/GetStatute.aspx?Code=FA&Value=154.125
  * - Cap update Sept 2025: https://www.bryanfagan.com/2025/10/new-texas-child-support-guideline-cap-and-percentages-2025-update/
+ *   Confirmed: $11,700/mo net resources cap effective Sept 1, 2025
+ * - TX OAG calculator example: $6,000 net, 2 children → $6,000 × 25% = $1,500/mo
+ *   Source: https://csapps.oag.texas.gov/monthly-child-support-calculator
  */
 
 import {

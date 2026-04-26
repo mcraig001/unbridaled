@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { ScenarioResult, ScenarioOutput, LineItem } from "@/lib/scenario-engine";
+import SessionGuard from "@/components/SessionGuard";
 
 const DISCLAIMER =
   "UNBRIDALED provides educational financial scenarios. This is not financial, legal, or tax advice. Consult a licensed financial advisor and family law attorney for guidance on your specific situation.";
@@ -72,6 +73,7 @@ export default function ResultsPage() {
 
   return (
     <main className="min-h-screen bg-stone-50 px-4 py-12">
+      <SessionGuard />
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">

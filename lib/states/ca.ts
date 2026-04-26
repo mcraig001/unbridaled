@@ -14,7 +14,11 @@
  *   https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=FAM&sectionNum=760.
  *
  * lastReviewed: 2026-04-26
- * verifiedAgainst: courts.ca.gov self-help, childsupport.ca.gov user guide (Apr 2025)
+ * verifiedAgainst:
+ *   - OFFICIAL: selfhelp.courts.ca.gov/spousal-support/temporary (2026-04-26)
+ *     Worked example: net $6,000 higher / $4,000 lower → 40%×6000 - 50%×4000 = $400/mo ✓
+ *   - cristinlowelaw.com: net $6,000/$3,000 → $900/mo ✓
+ *   - childsupport.ca.gov user guide (Apr 2025) — K factor UNVERIFIED (approximated)
  */
 
 export const CA_STATE = {

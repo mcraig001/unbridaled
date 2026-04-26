@@ -2,9 +2,11 @@
  * California formula tests
  *
  * Test cases sourced from:
- * - California courts self-help: https://courts.ca.gov
- * - cristinlowelaw.com worked example (Santa Clara formula)
- * - thesandslawgroup.com worked example
+ * - California Courts Self Help Guide (official): https://selfhelp.courts.ca.gov/spousal-support/temporary
+ *   Worked example verified 2026-04-26: Spouse 1 net $6,000 - Spouse 2 net $4,000 → $400/mo
+ * - cristinlowelaw.com worked example (Santa Clara formula):
+ *   Spouse A net $6,000 - Spouse B net $3,000 → $900/mo
+ * - Texas Law Help: https://texaslawhelp.org/article/spousal-maintenance-alimony (TX)
  */
 
 import {
@@ -14,6 +16,24 @@ import {
 } from "../lib/states/ca";
 
 describe("California Spousal Support", () => {
+  test("SC-0: OFFICIAL WORKED EXAMPLE — selfhelp.courts.ca.gov", () => {
+    // Source: https://selfhelp.courts.ca.gov/spousal-support/temporary
+    // Verified 2026-04-26
+    // Spouse 1 net: $6,000/mo, Spouse 2 net: $4,000/mo
+    // Official expected: 40% × $6,000 - 50% × $4,000 = $2,400 - $2,000 = $400/mo
+    const result = calcCASpousalSupport({
+      higherNetMonthlyIncome: 6000,
+      lowerNetMonthlyIncome: 4000,
+      combinedNetMonthlyIncome: 10000,
+      numberOfChildren: 0,
+      higherEarnerCustodyPct: 0.5,
+      marriageYears: 8,
+      maritalAssets: 100000,
+      maritalDebts: 20000,
+    });
+    expect(result.mid).toBe(400); // matches official CA courts self-help example exactly
+  });
+
   test("SC-1: Basic Santa Clara formula — cited worked example", () => {
     // Source: cristinlowelaw.com / thesandslawgroup.com
     // Spouse A net: $6,000/mo, Spouse B net: $3,000/mo

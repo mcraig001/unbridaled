@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * S6/G7: Legal gate middleware.
+ * S6/G7: Legal gate proxy (Next.js 16 — "proxy" replaces "middleware").
  * /app routes return "coming soon" unless LEGAL_REVIEW_COMPLETE=true.
- * This gate cannot be bypassed at the middleware level.
+ * This gate cannot be bypassed at the proxy level.
  */
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const isAppRoute =

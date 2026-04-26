@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { HouseholdFinancials, SupportedState } from "@/lib/scenario-engine";
+import SessionGuard from "@/components/SessionGuard";
+import PrivateBrowsingPrompt from "@/components/PrivateBrowsingPrompt";
 
 const STORAGE_KEY = "ub_intake_progress";
 
@@ -99,6 +101,8 @@ export default function IntakePage() {
 
   return (
     <main className="min-h-screen bg-stone-50 px-4 py-12">
+      <SessionGuard />
+      <PrivateBrowsingPrompt />
       <div className="max-w-xl mx-auto">
         {/* Progress */}
         <div className="mb-8">
