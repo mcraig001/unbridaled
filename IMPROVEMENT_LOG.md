@@ -75,25 +75,40 @@ Append-only. Each entry: pass, score, duration, top changes, blockers.
 
 ---
 
-## Pass 4 — Calculation Transparency (pending)
-**Status:** Not yet started
+## Pass 4 + 5 + 6 + 7 + 8 — Transparency, PDF, Conversion, Critique, Polish
+**Date:** 2026-04-26
+**Duration:** ~60 minutes
+**Commit:** 16b5a92
 
----
+### Score: 83/100
 
-## Pass 5 — PDF Quality (pending)
-**Status:** Not yet started
+| Category | Score | Notes |
+|----------|-------|-------|
+| Product shape adherence (10) | 9/10 | S1-S7 fully implemented. No AI relationship advice, quick exit everywhere, disclaimer on every page and PDF, LEGAL_REVIEW_COMPLETE gate. |
+| Safety UX completeness (10) | 8/10 | Session timeout ✓, private browsing prompt ✓, account deletion ✓, no marketing ✓. Pending: "safe device" onboarding note, iOS Safari Quick Exit verification, deletion confirmation email. |
+| Calculation accuracy (10) | 8/10 | 66 tests passing. Official CA worked example verified. TX and NY confirmed. CA K-factor still ESTIMATE with prominent disclosure. Formula confidence badges implemented. |
+| Sourcing integrity (10) | 9/10 | Every formula cited with primary URL, date, and verification note. NumberBreakdown popover exposes source on any number click. |
+| Disclaimers + legal posture (10) | 7/10 | G1 everywhere, CRITIQUE.md documents ToS/Privacy Policy as blocking gap. Attorney engagement needed before gate opens. |
+| PDF report quality (10) | 7/10 | 7-page structure, all sources cited, attorney/advisor question pages. Not yet print-tested. Reference report comparison pending. |
+| Conversion readiness (10) | 7/10 | Pricing page ✓, signup page ✓, Stripe checkout with 14-day trial ✓, UpsellPrompt ✓, anti-dark-patterns section ✓. Stripe product IDs need operator configuration. |
+| Code quality (10) | 9/10 | 66 tests, build clean, no deprecation warnings. TypeScript throughout. Proxy convention (Next.js 16). All routes verified. |
+| Operator-readiness (10) | 9/10 | OPERATOR_HANDOFF.md complete with every gate, action item, cost estimate. CRITIQUE.md written with specific fixes. |
+| Scalability (10) | 8/10 | State addition pattern proven (3 lines in runScenarios, new state file, formula seed). Formula versioning in ub_state_formulas. CRITIQUE.md maps expansion to WA/FL/IL. |
 
----
+### Top Changes (Passes 4-8)
+1. NumberBreakdown.tsx: click-through transparency on every output number (S5)
+2. FormulaConfidence.tsx: HIGH/MEDIUM/ESTIMATE badges per formula type and state
+3. Stripe checkout flow with 14-day trial, no credit card for free tier
+4. UpsellPrompt: soft post-scenario upsell, dismissible, specific benefit stated (S7)
+5. CRITIQUE.md: 5 adversarial stress tests with changes implemented
+6. 404 and error pages (dignified, privacy-first)
+7. /methodology/why-unbridaled: honest competitor comparison table
+8. Attorney partnership CTA
 
-## Pass 6 — Conversion + Pricing (pending)
-**Status:** Not yet started
-
----
-
-## Pass 7 — Adversarial Critique (pending)
-**Status:** Not yet started
-
----
-
-## Pass 8 — Production Polish (pending)
-**Status:** Not yet started
+### Final State
+**Build:** ✓ Clean (Next.js 16, proxy convention, no warnings)
+**Tests:** 66/66 passing
+**Commits:** 4 total (9d8ac6f, d43cb8b, 8689c8e, 16b5a92)
+**Repo:** https://github.com/mcraig001/unbridaled (main branch)
+**Legal gate:** LEGAL_REVIEW_COMPLETE=false (correct — not yet opened)
+**Domain:** PENDING operator approval (getunbridaled.com available, ~$12/yr)
