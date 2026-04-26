@@ -118,8 +118,9 @@ Engage a family law attorney and a technology/privacy attorney for:
 - [ ] "Not financial advice" language — sufficiency
 - [ ] Terms of Service draft
 - [ ] Privacy Policy draft (CCPA for CA users)
-- [ ] State formula accuracy review for CA, TX, NY
+- [ ] State formula accuracy review for CA, TX, NY, WA
 - [ ] Review CA child support K-factor approximation disclosure
+- [ ] Review WA spousal maintenance / child support ESTIMATE disclosures (no statutory formula)
 
 **Budget estimate:** $1,500–$3,000 for 2-3 hours of attorney time.
 

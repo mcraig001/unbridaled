@@ -248,14 +248,15 @@ function Step0State({
     <>
       <StepHeader
         title="Which state do you live in?"
-        subtitle="We use state-specific legal formulas. Three states are supported at launch."
+        subtitle="We use state-specific legal formulas. Four states are supported at launch."
       />
       <div className="flex flex-col gap-3">
-        {(["CA", "TX", "NY"] as SupportedState[]).map((s) => {
+        {(["CA", "TX", "NY", "WA"] as SupportedState[]).map((s) => {
           const labels: Record<SupportedState, string> = {
             CA: "California — community property",
             TX: "Texas — community property (modified)",
             NY: "New York — equitable distribution",
+            WA: "Washington — community property (just and equitable)",
           };
           return (
             <button

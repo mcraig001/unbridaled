@@ -5,12 +5,14 @@ import Link from "next/link";
 import { CA_CHECKLIST, CA_CHECKLIST_META } from "@/lib/legal-checklists/ca";
 import { TX_CHECKLIST, TX_CHECKLIST_META } from "@/lib/legal-checklists/tx";
 import { NY_CHECKLIST, NY_CHECKLIST_META } from "@/lib/legal-checklists/ny";
+import { WA_CHECKLIST, WA_CHECKLIST_META } from "@/lib/legal-checklists/wa";
 import type { ChecklistItem } from "@/lib/legal-checklists/ca";
 
 const STATE_DATA = {
   CA: { checklist: CA_CHECKLIST, meta: CA_CHECKLIST_META },
   TX: { checklist: TX_CHECKLIST, meta: TX_CHECKLIST_META },
   NY: { checklist: NY_CHECKLIST, meta: NY_CHECKLIST_META },
+  WA: { checklist: WA_CHECKLIST, meta: WA_CHECKLIST_META },
 };
 
 type StateKey = keyof typeof STATE_DATA;

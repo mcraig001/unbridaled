@@ -15,9 +15,9 @@ export async function POST(req: NextRequest) {
   }
 
   // Validate required fields
-  const supportedStates = ["CA", "TX", "NY"];
+  const supportedStates = ["CA", "TX", "NY", "WA"];
   if (!supportedStates.includes(inputs.state)) {
-    return NextResponse.json({ error: "Unsupported state. Supported: CA, TX, NY" }, { status: 400 });
+    return NextResponse.json({ error: "Unsupported state. Supported: CA, TX, NY, WA" }, { status: 400 });
   }
 
   if (typeof inputs.yourNetMonthlyIncome !== "number" || inputs.yourNetMonthlyIncome < 0) {

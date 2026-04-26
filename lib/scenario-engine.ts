@@ -19,8 +19,13 @@ import {
   calcNYChildSupport,
   calcNYEquitableDistribution,
 } from "./states/ny";
+import {
+  calcWASpousalMaintenance,
+  calcWAChildSupport,
+  calcWAPropertyDivision,
+} from "./states/wa";
 
-export type SupportedState = "CA" | "TX" | "NY";
+export type SupportedState = "CA" | "TX" | "NY" | "WA";
 
 export interface HouseholdFinancials {
   // Income
@@ -270,6 +275,26 @@ function getSpousalSupportForState(inputs: HouseholdFinancials) {
     };
   }
 
+  if (inputs.state === "WA") {
+    const result = calcWASpousalMaintenance({
+      higherNetMonthlyIncome: higherNet,
+      lowerNetMonthlyIncome: lowerNet,
+      combinedNetMonthlyIncome: higherNet + lowerNet,
+      numberOfChildren: inputs.numberOfChildren,
+      marriageYears: inputs.marriageYears,
+      maritalAssets: inputs.maritalAssets,
+      maritalDebts: inputs.maritalDebts,
+    });
+    return {
+      mid: result.mid,
+      low: result.low,
+      high: result.high,
+      formula: result.formula,
+      sourceUrl: result.sourceUrl,
+      note: result.note,
+    };
+  }
+
   return { mid: 0, low: 0, high: 0, formula: "N/A", sourceUrl: "", note: "Unsupported state" };
 }
 
@@ -329,6 +354,19 @@ function getChildSupportForState(inputs: HouseholdFinancials) {
     });
   }
 
+  if (inputs.state === "WA") {
+    const result = calcWAChildSupport({
+      higherNetMonthlyIncome: Math.max(inputs.yourNetMonthlyIncome, inputs.partnerNetMonthlyIncome),
+      lowerNetMonthlyIncome: Math.min(inputs.yourNetMonthlyIncome, inputs.partnerNetMonthlyIncome),
+      combinedNetMonthlyIncome: inputs.yourNetMonthlyIncome + inputs.partnerNetMonthlyIncome,
+      numberOfChildren: inputs.numberOfChildren,
+      marriageYears: inputs.marriageYears,
+      maritalAssets: inputs.maritalAssets,
+      maritalDebts: inputs.maritalDebts,
+    });
+    return result;
+  }
+
   return null;
 }
 
@@ -357,11 +395,22 @@ function getPropertyDivision(inputs: HouseholdFinancials) {
       note: dist.note,
     };
   }
+  if (inputs.state === "WA") {
+    const dist = calcWAPropertyDivision(inputs.maritalAssets, inputs.maritalDebts, inputs.marriageYears);
+    return {
+      netMaritalEstate: dist.netMaritalEstate,
+      eachSpouseShare: dist.estimatedMidShare,
+      formula: dist.formula,
+      sourceUrl: dist.sourceUrl,
+      note: dist.note,
+    };
+  }
+
   return { netMaritalEstate: 0, eachSpouseShare: 0, formula: "", sourceUrl: "", note: "" };
 }
 
 export function runScenarios(inputs: HouseholdFinancials): ScenarioResult {
-  const SUPPORTED: SupportedState[] = ["CA", "TX", "NY"];
+  const SUPPORTED: SupportedState[] = ["CA", "TX", "NY", "WA"];
   if (!(SUPPORTED as string[]).includes(inputs.state)) {
     throw new Error(`Unsupported state: ${inputs.state}. Supported states: ${SUPPORTED.join(", ")}`);
   }

@@ -167,9 +167,9 @@ describe("Scenario Engine — Edge cases", () => {
   test("SE-EDGE-5: Unsupported state throws error", () => {
     const inputs: HouseholdFinancials = {
       ...BASE_CA,
-      state: "WA" as "CA",
+      state: "FL" as "CA",
     };
-    expect(() => runScenarios(inputs)).toThrow();
+    expect(() => runScenarios(inputs)).toThrow(/Unsupported state/);
   });
 
   test("SE-EDGE-6: generatedAt is a valid ISO timestamp", () => {
