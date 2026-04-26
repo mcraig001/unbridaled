@@ -30,14 +30,13 @@ const styles = StyleSheet.create({
   title: { fontSize: 18, fontFamily: "Helvetica-Bold", marginBottom: 4 },
   subtitle: { fontSize: 10, color: "#78716c" },
   disclaimerBox: {
-    backgroundColor: "#fefce8",
-    borderWidth: 1,
-    borderColor: "#fde047",
+    borderWidth: 1.5,
+    borderColor: "#1c1917",
     borderRadius: 4,
     padding: 10,
     marginBottom: 16,
   },
-  disclaimerText: { fontSize: 8, color: "#854d0e", lineHeight: 1.4 },
+  disclaimerText: { fontSize: 8, color: "#1c1917", lineHeight: 1.4 },
   sectionHeader: {
     fontSize: 12,
     fontFamily: "Helvetica-Bold",
@@ -53,13 +52,15 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   scenarioHeader: {
-    backgroundColor: "#292524",
+    backgroundColor: "#1c1917",
     padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#1c1917",
   },
   scenarioHeaderText: {
     fontSize: 11,
     fontFamily: "Helvetica-Bold",
-    color: "#fff",
+    color: "#ffffff",
   },
   scenarioBody: { padding: 10 },
   row: {
@@ -114,17 +115,15 @@ function Footer({ page }: { page?: string }) {
 function ScenarioSection({
   scenario,
   title,
-  bgColor,
 }: {
   scenario: ScenarioOutput;
   title: string;
-  bgColor?: string;
 }) {
   const net = scenario.monthlyNet;
 
   return (
     <View style={styles.scenarioCard}>
-      <View style={[styles.scenarioHeader, bgColor ? { backgroundColor: bgColor } : {}]}>
+      <View style={styles.scenarioHeader}>
         <Text style={styles.scenarioHeaderText}>{title}</Text>
         <Text style={{ fontSize: 8, color: "#d6d3d1", marginTop: 2 }}>
           {scenario.description}
@@ -253,6 +252,38 @@ export function ScenarioPDF({ result }: { result: ScenarioResult }) {
           </Text>
         </View>
 
+        {/* Key numbers at a glance */}
+        <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }}>
+          {[
+            { label: "Scenario A monthly net", value: scenarios.stay.monthlyNet },
+            { label: "Scenario B monthly net", value: scenarios.leaveWithDivision.monthlyNet },
+            { label: "Scenario C monthly net", value: scenarios.leaveWithoutDivision.monthlyNet },
+          ].map(({ label, value }) => (
+            <View
+              key={label}
+              style={{
+                flex: 1,
+                borderWidth: 1,
+                borderColor: "#e7e5e4",
+                borderRadius: 4,
+                padding: 8,
+              }}
+            >
+              <Text style={{ fontSize: 7, color: "#78716c", marginBottom: 3 }}>{label}</Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: "Helvetica-Bold",
+                  color: value >= 0 ? "#15803d" : "#dc2626",
+                }}
+              >
+                {value >= 0 ? "+" : ""}${Math.abs(value).toLocaleString()}
+              </Text>
+              <Text style={{ fontSize: 7, color: "#a8a29e" }}>/month</Text>
+            </View>
+          ))}
+        </View>
+
         <View style={styles.disclaimerBox}>
           <Text style={styles.disclaimerText}>{DISCLAIMER}</Text>
         </View>
@@ -264,12 +295,10 @@ export function ScenarioPDF({ result }: { result: ScenarioResult }) {
         <ScenarioSection
           scenario={scenarios.leaveWithDivision}
           title="Scenario B: Separation with legal process"
-          bgColor="#1e3a5f"
         />
         <ScenarioSection
           scenario={scenarios.leaveWithoutDivision}
           title="Scenario C: Separation without legal process"
-          bgColor="#7c2d12"
         />
 
         <Footer page="Page 2 of 7" />

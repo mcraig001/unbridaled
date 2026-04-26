@@ -175,7 +175,8 @@ export function calcNYChildSupport(inputs: NYInputs): NYChildSupportResult {
   const obligorIncome = childrenInCustodyOfLower
     ? higherEarnerGrossAnnualIncome
     : lowerEarnerGrossAnnualIncome;
-  const proRataShare = Math.min(obligorIncome, cappedCombined) / cappedCombined;
+  const proRataShare =
+    cappedCombined > 0 ? Math.min(obligorIncome, cappedCombined) / cappedCombined : 0;
   const obligorAnnualObligation = totalAnnualObligation * proRataShare;
   const monthly = Math.round(obligorAnnualObligation / 12);
 

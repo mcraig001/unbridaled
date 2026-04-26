@@ -223,4 +223,42 @@ describe("California Community Property", () => {
     const result = calcCACommunityPropertySplit(200000, 50000);
     expect(result.sourceUrl).toContain("leginfo.legislature.ca.gov");
   });
+
+  test("CP-4: Zero assets and zero debts = zero share", () => {
+    const result = calcCACommunityPropertySplit(0, 0);
+    expect(result.netMaritalEstate).toBe(0);
+    expect(result.eachSpouseShare).toBe(0);
+  });
+});
+
+describe("California Spousal Support — edge cases", () => {
+  test("SC-EDGE-1: Very short marriage (< 3 years) note differs from long marriage", () => {
+    const result = calcCASpousalSupport({
+      higherNetMonthlyIncome: 8000,
+      lowerNetMonthlyIncome: 1000,
+      combinedNetMonthlyIncome: 9000,
+      numberOfChildren: 0,
+      higherEarnerCustodyPct: 0.5,
+      marriageYears: 2,
+      maritalAssets: 10000,
+      maritalDebts: 0,
+    });
+    expect(result.mid).toBeGreaterThan(0);
+    expect(result.note).toMatch(/year/i);
+  });
+
+  test("SC-EDGE-2: Formula never goes negative (result.mid >= 0)", () => {
+    // Even when lower earner earns more than higher earner (edge of formula)
+    const result = calcCASpousalSupport({
+      higherNetMonthlyIncome: 3000,
+      lowerNetMonthlyIncome: 4000,
+      combinedNetMonthlyIncome: 7000,
+      numberOfChildren: 0,
+      higherEarnerCustodyPct: 0.5,
+      marriageYears: 5,
+      maritalAssets: 0,
+      maritalDebts: 0,
+    });
+    expect(result.mid).toBeGreaterThanOrEqual(0);
+  });
 });

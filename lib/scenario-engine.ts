@@ -361,6 +361,11 @@ function getPropertyDivision(inputs: HouseholdFinancials) {
 }
 
 export function runScenarios(inputs: HouseholdFinancials): ScenarioResult {
+  const SUPPORTED: SupportedState[] = ["CA", "TX", "NY"];
+  if (!(SUPPORTED as string[]).includes(inputs.state)) {
+    throw new Error(`Unsupported state: ${inputs.state}. Supported states: ${SUPPORTED.join(", ")}`);
+  }
+
   const spousal = getSpousalSupportForState(inputs);
   const childSupport = getChildSupportForState(inputs);
   const property = getPropertyDivision(inputs);

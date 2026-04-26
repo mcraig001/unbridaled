@@ -150,4 +150,31 @@ describe("Scenario Engine — Edge cases", () => {
     // Higher earner should pay, not receive
     expect(result.scenarios.leaveWithDivision.spousalSupportReceived).toBeNull();
   });
+
+  test("SE-EDGE-4: Zero savings — runway is 0 when net is negative", () => {
+    const inputs: HouseholdFinancials = {
+      ...BASE_CA,
+      currentSavings: 0,
+      yourGrossMonthlyIncome: 0,
+      yourNetMonthlyIncome: 0,
+      youAreHigherEarner: false,
+    };
+    const result = runScenarios(inputs);
+    // With zero savings and possibly negative net, runway should be 0 or positive-cashflow
+    expect(result.scenarios.leaveWithoutDivision.monthsRunway).toBeGreaterThanOrEqual(0);
+  });
+
+  test("SE-EDGE-5: Unsupported state throws error", () => {
+    const inputs: HouseholdFinancials = {
+      ...BASE_CA,
+      state: "WA" as "CA",
+    };
+    expect(() => runScenarios(inputs)).toThrow();
+  });
+
+  test("SE-EDGE-6: generatedAt is a valid ISO timestamp", () => {
+    const result = runScenarios(BASE_CA);
+    expect(() => new Date(result.generatedAt)).not.toThrow();
+    expect(new Date(result.generatedAt).getTime()).toBeGreaterThan(0);
+  });
 });

@@ -169,3 +169,40 @@ describe("New York Equitable Distribution", () => {
     expect(result.netMaritalEstate).toBe(400000);
   });
 });
+
+describe("New York — edge cases", () => {
+  test("NY-M-EDGE-1: Income exactly at $228K cap — cap NOT applied", () => {
+    const result = calcNYMaintenance({
+      ...BASE_NY,
+      higherEarnerGrossAnnualIncome: 228000,
+      higherEarnerGrossMonthly: 19000,
+    });
+    expect(result.capApplied).toBe(false);
+  });
+
+  test("NY-M-EDGE-2: Income one dollar above $228K — cap applied", () => {
+    const result = calcNYMaintenance({
+      ...BASE_NY,
+      higherEarnerGrossAnnualIncome: 228001,
+      higherEarnerGrossMonthly: 19000,
+    });
+    expect(result.capApplied).toBe(true);
+  });
+
+  test("NY-CS-EDGE-1: 5 children = 35% (CSSA)", () => {
+    const result = calcNYChildSupport({ ...BASE_NY, numberOfChildren: 5 });
+    expect(result.percentageApplied).toBe(0.35);
+  });
+
+  test("NY-CS-EDGE-2: Zero income = zero child support", () => {
+    const result = calcNYChildSupport({
+      ...BASE_NY,
+      higherEarnerGrossAnnualIncome: 0,
+      lowerEarnerGrossAnnualIncome: 0,
+      higherEarnerGrossMonthly: 0,
+      lowerEarnerGrossMonthly: 0,
+      numberOfChildren: 2,
+    });
+    expect(result.monthly).toBe(0);
+  });
+});

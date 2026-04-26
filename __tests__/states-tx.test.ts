@@ -165,4 +165,53 @@ describe("Texas Property Division", () => {
     const result = calcTXPropertyDivision(100000, 0);
     expect(result.sourceUrl).toContain("statutes.capitol.texas.gov");
   });
+
+  test("TX-PD-3: Zero assets zero debts = zero", () => {
+    const result = calcTXPropertyDivision(0, 0);
+    expect(result.netMaritalEstate).toBe(0);
+    expect(result.presumptiveSplit).toBe(0);
+  });
+});
+
+describe("Texas Spousal Maintenance — edge cases", () => {
+  test("TX-SM-EDGE-1: Disability qualifies even with short marriage", () => {
+    const result = calcTXSpousalMaintenance({
+      ...BASE_TX,
+      marriageYears: 2,
+      payeeDisabled: true,
+      familyViolence: false,
+    });
+    expect(result.eligible).toBe(true);
+    expect(result.eligibilityReason).toMatch(/disabled|disability/i);
+  });
+
+  test("TX-SM-EDGE-2: Caring for disabled child qualifies regardless of marriage length", () => {
+    const result = calcTXSpousalMaintenance({
+      ...BASE_TX,
+      marriageYears: 1,
+      caresForDisabledChild: true,
+    });
+    expect(result.eligible).toBe(true);
+  });
+
+  test("TX-CS-EDGE-1: Net resources exactly at cap ($11,700) — no cap applied", () => {
+    // Exactly at cap = cap NOT applied (cap applies when ABOVE cap)
+    const result = calcTXChildSupport({
+      ...BASE_TX,
+      payorNetMonthlyResources: 11700,
+      numberOfChildren: 1,
+    });
+    // $11,700 × 20% = $2,340
+    expect(result.monthly).toBe(2340);
+  });
+
+  test("TX-CS-EDGE-2: Net resources one dollar above cap triggers cap", () => {
+    const result = calcTXChildSupport({
+      ...BASE_TX,
+      payorNetMonthlyResources: 11701,
+      numberOfChildren: 1,
+    });
+    expect(result.capApplied).toBe(true);
+    expect(result.monthly).toBe(2340); // capped at $11,700 × 20%
+  });
 });
