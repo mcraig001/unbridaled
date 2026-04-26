@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { buildDeletionConfirmedEmail, sendEmail } from "@/lib/email/templates";
 
 /**
  * Account deletion API — G2 compliance
@@ -112,6 +113,13 @@ export async function DELETE(req: NextRequest) {
       Authorization: `Bearer ${serviceKey}`,
     },
   });
+
+  // Send deletion confirmation email (fire-and-forget, non-blocking)
+  if (user.email) {
+    sendEmail(buildDeletionConfirmedEmail(user.email)).catch((err) =>
+      console.error("[unbridaled-email] deletion confirmation failed:", err)
+    );
+  }
 
   return NextResponse.json({
     message:

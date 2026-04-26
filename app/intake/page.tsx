@@ -613,6 +613,19 @@ function Step7Acknowledgment({
         </p>
       </div>
 
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-5 flex gap-3">
+        <span className="text-amber-600 text-base mt-0.5 shrink-0" aria-hidden>⚠</span>
+        <div className="text-sm text-amber-800 leading-relaxed">
+          <p className="font-medium mb-1">Use a safe device</p>
+          <p>
+            If someone monitors your device or internet activity, use a private browser window or a
+            device they do not have access to. Unbridaled stores nothing on our servers until you
+            create an account — all data entered so far exists only in this browser tab and is
+            cleared when you close it.
+          </p>
+        </div>
+      </div>
+
       <label className="flex items-start gap-3 cursor-pointer">
         <input
           type="checkbox"
