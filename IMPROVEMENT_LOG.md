@@ -43,13 +43,35 @@ Append-only. Each entry: pass, score, duration, top changes, blockers.
 
 ---
 
-## Pass 2 — State Formula Rigor (pending)
-**Status:** Not yet started
+## Pass 2 + 3 — State Formula Rigor + Safety UX Hardening
+**Date:** 2026-04-26
+**Duration:** ~45 minutes
+**Commit:** d43cb8b
 
----
+### Score: 76/100
 
-## Pass 3 — Safety UX Hardening (pending)
-**Status:** Not yet started
+| Category | Score | Notes |
+|----------|-------|-------|
+| Product shape adherence (10) | 9/10 | All S1-S7. No relationship advice, disclaimers everywhere, gate active, Quick Exit everywhere. |
+| Safety UX completeness (10) | 8/10 | Quick Exit ✓, session timeout ✓, private browsing prompt ✓, no marketing emails ✓, account deletion flow ✓. Remaining: "safe device" onboarding note, iOS Safari Quick Exit test, deletion confirmation email. |
+| Calculation accuracy (10) | 8/10 | Official worked example (selfhelp.courts.ca.gov) matching ✓. TX verified against OAG ✓. NY formula confirmed. CA K-factor still ESTIMATE — disclosed. |
+| Sourcing integrity (10) | 9/10 | All primary sources cited. Verification dates recorded. Official worked example added to test suite. |
+| Disclaimers + legal posture (10) | 7/10 | G1 on every page ✓. CRITIQUE.md identifies ToS/Privacy Policy as blocking gap. Attorney not yet engaged. |
+| PDF report quality (10) | 6/10 | Structure good (7 pages), not yet compared to reference reports. Print test pending. |
+| Conversion readiness (10) | 5/10 | Pricing page ✓, no Stripe checkout flow yet, no trial wiring. |
+| Code quality (10) | 9/10 | 66 tests passing, build clean, no deprecation warnings. Proxy convention adopted. Typed throughout. |
+| Operator-readiness (10) | 8/10 | OPERATOR_HANDOFF.md complete with every gate and action item. |
+| Scalability (10) | 7/10 | State file pattern clear. Adding state 4 requires: new state file, runScenarios() 3 lines, formula seed. Pass 2 proved the pattern. |
+
+### Top Changes
+1. Official CA worked example verified and added to test suite (SC-0 test)
+2. TX/NY formulas confirmed against primary sources with verification dates
+3. SessionGuard (15-min idle clear) on intake/results
+4. PrivateBrowsingPrompt on intake
+5. Account deletion API route (full G2 purge)
+6. proxy.ts (Next.js 16) — no deprecation warnings
+7. CRITIQUE.md (5 adversarial stress tests)
+8. OPERATOR_HANDOFF.md (complete pre-launch gate checklist)
 
 ---
 
