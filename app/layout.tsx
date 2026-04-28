@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import QuickExitButton from "@/components/QuickExitButton";
 
@@ -28,8 +29,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900">
         <QuickExitButton />
         {children}
-        <footer className="mt-auto border-t border-stone-200 bg-white px-6 py-4">
+        <footer className="mt-auto border-t border-stone-200 bg-white px-6 py-5">
           <p className="text-xs text-stone-500 max-w-3xl mx-auto text-center">{DISCLAIMER}</p>
+          <div className="flex justify-center gap-4 mt-3">
+            <Link href="/legal/terms" className="text-xs text-stone-400 hover:text-stone-600">Terms</Link>
+            <Link href="/legal/privacy" className="text-xs text-stone-400 hover:text-stone-600">Privacy</Link>
+          </div>
         </footer>
       </body>
     </html>
