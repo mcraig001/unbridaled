@@ -99,11 +99,6 @@ export default function WhyUnbridaledPage() {
           </a>
         </section>
 
-        <div className="mt-10 p-4 bg-stone-50 border border-stone-200 rounded text-xs text-stone-500 leading-relaxed">
-          <strong>Not advice.</strong> Unbridaled provides educational financial scenarios. This is
-          not financial, legal, or tax advice. Consult a licensed financial advisor and family law
-          attorney for guidance on your specific situation.
-        </div>
       </div>
     </main>
   );

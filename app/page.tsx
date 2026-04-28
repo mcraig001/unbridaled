@@ -104,16 +104,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Disclaimer */}
-      <section className="bg-stone-100 border-t border-stone-200 px-6 py-8">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-xs text-stone-500 text-center leading-relaxed">
-            <strong>Not advice.</strong> Unbridaled provides educational financial scenarios. This
-            is not financial, legal, or tax advice. Consult a licensed financial advisor and family
-            law attorney for guidance on your specific situation.
-          </p>
-        </div>
-      </section>
     </main>
   );
 }

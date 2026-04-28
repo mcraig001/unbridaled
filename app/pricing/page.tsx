@@ -204,12 +204,6 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* Disclaimer */}
-        <p className="text-xs text-stone-400 text-center leading-relaxed">
-          UNBRIDALED provides educational financial scenarios. This is not financial, legal, or tax
-          advice. Consult a licensed financial advisor and family law attorney for guidance on your
-          specific situation.
-        </p>
       </div>
     </main>
   );
